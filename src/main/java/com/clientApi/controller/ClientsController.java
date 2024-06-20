@@ -4,6 +4,7 @@ package com.clientApi.controller;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,11 @@ public class ClientsController {
         return ResponseEntity.ok(client);
     }
     
+    @GetMapping
+    public List<Client> getAllClients() {
+        return clientService.getAllClients();
+    }
+    
     @PostMapping
     public ResponseEntity<Client> createClient(@RequestBody Client client) throws URISyntaxException {
         Client savedClient = clientRepository.save(client);
@@ -58,15 +64,12 @@ public class ClientsController {
         return ResponseEntity.ok().build();
     }
     
-    //Temp to quickly add a client
-    @GetMapping("/add-client")
-    public ResponseEntity<Client> addClient() {
-        Client client = new Client();
-        client.setName("Jane Doe");
-        client.setEmail("jane.doe@example.com");
-
-        Client savedClient = clientService.save(client);
-        return ResponseEntity.ok(savedClient);
-    }
+	// Temp to quickly add a client
+	@GetMapping("/add-client")
+	public ResponseEntity<Client> addClient() {
+		Client client = Client.builder().name("Jane Doe").email("jane.doe@example.com").build();
+		Client savedClient = clientService.save(client);
+		return ResponseEntity.ok(savedClient);
+	}
     
 }
