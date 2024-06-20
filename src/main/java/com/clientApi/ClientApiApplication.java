@@ -1,4 +1,5 @@
-package com.Client.Client_api;
+package com.clientApi;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
